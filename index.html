@@ -3,24 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>김가네 고춧가루 | 프리미엄 농가직거래</title>
-  <meta name="description" content="완도에서 직접 재배한 프리미엄 고추를 농부가 직접 수확·건조·가공하여 판매합니다." />
-  
+  <title>김가네 | 완도 농가직송 고춧가루 · 염소즙</title>
+  <meta name="description" content="완도에서 직접 재배하고 정성껏 고아낸 고춧가루와 염소즙을 농가가 직접 만들어 보내드립니다." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            primary: '#b02525', // 조금 더 고급스러운 딥 레드
-            primaryHover: '#8a1d1d',
-            accent: '#d4af37', // 고급스러운 골드 포인트
-            bgLight: '#fbf9f6', // 미세하게 톤 다운된 웜 베이지
-            textDark: '#2d3748',
+            ink: '#2b241d',
+            paper: '#f7f1e4',
+            paper2: '#efe6d3',
+            card: '#fffdf7',
+            pepper: '#a3342c',
+            pepperDeep: '#7a2621',
+            herb: '#57624a',
+            herbDeep: '#414a37',
+            gold: '#b3902f',
           },
           fontFamily: {
             sans: ['"Noto Sans KR"', 'sans-serif'],
@@ -33,303 +37,389 @@
 
   <style>
     html { scroll-behavior: smooth; }
-    body { background-color: #fbf9f6; color: #2d3748; }
-    
-    .nav-link { position: relative; }
+    body {
+      background-color: #f7f1e4;
+      color: #2b241d;
+      background-image:
+        radial-gradient(circle at 10% 5%, rgba(163,52,44,0.04), transparent 40%),
+        radial-gradient(circle at 90% 15%, rgba(87,98,74,0.05), transparent 45%);
+    }
+
+    .nav-link { position: relative; padding-bottom: 2px; }
     .nav-link::after {
-      content: ''; position: absolute; width: 0; height: 2px;
-      bottom: -4px; left: 50%; background-color: #b02525;
-      transition: all 0.3s ease; transform: translateX(-50%);
+      content: ''; position: absolute; width: 0; height: 1px;
+      bottom: -3px; left: 0; background-color: currentColor;
+      transition: width 0.3s ease;
     }
     .nav-link:hover::after { width: 100%; }
 
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-    .faq-item.active .faq-answer { max-height: 200px; }
-    .faq-item.active .faq-icon { transform: rotate(180deg); }
-
     #order-modal { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
     #order-modal.active { opacity: 1; pointer-events: auto; }
-    
+
     .hamburger span { transition: all 0.3s ease; }
-    .mobile-menu-active .hamburger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-menu-active .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .mobile-menu-active .hamburger span:nth-child(2) { opacity: 0; }
-    .mobile-menu-active .hamburger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-    
-    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-    .mobile-menu-active #mobile-menu { max-height: 300px; }
+    .mobile-menu-active .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .mobile-menu-active #mobile-menu { max-height: 320px; }
+
+    /* section divider — a soft ridge line evoking a terraced field, not decoration */
+    .ridge-divider {
+      height: 40px;
+      background: linear-gradient(to bottom right, transparent 49.3%, #f7f1e4 50%) top left / 22px 40px repeat-x;
+    }
+
+    .process-line {
+      background-image: repeating-linear-gradient(to right, #b3902f 0, #b3902f 6px, transparent 6px, transparent 14px);
+      height: 2px;
+    }
+    @media (max-width: 767px) {
+      .process-line-v {
+        background-image: repeating-linear-gradient(to bottom, #b3902f 0, #b3902f 6px, transparent 6px, transparent 14px);
+        width: 2px;
+      }
+    }
+
+    .type-tab.is-active { color: #fffdf7; }
+    .type-tab.is-active.tab-pepper { background-color: #a3342c; }
+    .type-tab.is-active.tab-herb { background-color: #57624a; }
+
+    ::selection { background: #e7c9a8; color: #2b241d; }
   </style>
 </head>
-<body class="font-sans antialiased selection:bg-red-200 selection:text-red-900">
+<body class="font-sans antialiased">
 
-  <header class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300 shadow-sm" id="header">
+  <header class="fixed w-full top-0 z-50 bg-paper/95 backdrop-blur-md border-b border-black/5" id="header">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
-        
+
         <a href="#" class="flex items-center gap-2">
-          <img src="Gemini_Generated_Image_wyel2ewyel2ewyel.png" alt="김가네 로고" class="h-12 w-auto mix-blend-multiply drop-shadow-sm" />
+          <img src="Gemini_Generated_Image_wyel2ewyel2ewyel.png" alt="김가네 로고" class="h-11 w-auto mix-blend-multiply" />
         </a>
 
-        <nav class="hidden md:flex space-x-10 text-gray-700 font-medium tracking-tight">
-          <a href="#hero" class="nav-link hover:text-primary transition-colors">브랜드 스토리</a>
-          <a href="#products" class="nav-link hover:text-primary transition-colors">제품 안내</a>
-          <a href="#process" class="nav-link hover:text-primary transition-colors">재배 과정</a>
-          <a href="#reviews" class="nav-link hover:text-primary transition-colors">고객 후기</a>
+        <nav class="hidden md:flex items-center space-x-9 text-[15px] text-ink/80 font-medium">
+          <a href="#hero" class="nav-link hover:text-ink">이야기</a>
+          <a href="#process" class="nav-link hover:text-ink">만드는 과정</a>
+          <a href="#products" class="nav-link hover:text-ink">제품</a>
+          <a href="#reviews" class="nav-link hover:text-ink">후기</a>
         </nav>
 
         <div class="flex items-center gap-4">
-          <a href="tel:000-0000-0000" class="hidden md:inline-flex items-center justify-center px-6 py-2 bg-gray-900 rounded-full text-sm font-bold text-white hover:bg-primary transition-colors shadow-md">
-            전화 주문
+          <a href="tel:010-2664-6246" class="hidden md:inline-flex items-center justify-center px-6 py-2.5 bg-ink rounded-full text-sm font-bold text-paper hover:bg-pepperDeep transition-colors">
+            010-2664-6246
           </a>
           <button class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 hamburger" id="menu-btn" aria-label="메뉴 열기">
-            <span class="block w-6 h-0.5 bg-gray-900 rounded-full"></span>
-            <span class="block w-6 h-0.5 bg-gray-900 rounded-full"></span>
-            <span class="block w-6 h-0.5 bg-gray-900 rounded-full"></span>
+            <span class="block w-6 h-0.5 bg-ink rounded-full"></span>
+            <span class="block w-6 h-0.5 bg-ink rounded-full"></span>
+            <span class="block w-6 h-0.5 bg-ink rounded-full"></span>
           </button>
         </div>
       </div>
     </div>
-    
-    <div id="mobile-menu" class="md:hidden bg-white border-b border-gray-100 absolute w-full">
+
+    <div id="mobile-menu" class="md:hidden bg-paper border-b border-black/5 absolute w-full">
       <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col text-center">
-        <a href="#hero" class="block px-3 py-3 font-medium text-gray-700 hover:text-primary bg-gray-50 rounded-lg">브랜드 스토리</a>
-        <a href="#products" class="block px-3 py-3 font-medium text-gray-700 hover:text-primary bg-gray-50 rounded-lg">제품 안내</a>
-        <a href="#reviews" class="block px-3 py-3 font-medium text-gray-700 hover:text-primary bg-gray-50 rounded-lg">고객 후기</a>
-        <a href="tel:000-0000-0000" class="mt-4 block px-3 py-3 font-bold bg-gray-900 text-white rounded-xl">전화 주문</a>
+        <a href="#hero" class="block px-3 py-3 font-medium text-ink/80 hover:text-ink bg-paper2/60 rounded-lg">이야기</a>
+        <a href="#process" class="block px-3 py-3 font-medium text-ink/80 hover:text-ink bg-paper2/60 rounded-lg">만드는 과정</a>
+        <a href="#products" class="block px-3 py-3 font-medium text-ink/80 hover:text-ink bg-paper2/60 rounded-lg">제품</a>
+        <a href="#reviews" class="block px-3 py-3 font-medium text-ink/80 hover:text-ink bg-paper2/60 rounded-lg">후기</a>
+        <a href="tel:010-2664-6246" class="mt-4 block px-3 py-3 font-bold bg-ink text-paper rounded-xl">010-2664-6246</a>
       </div>
     </div>
   </header>
 
-  <section id="hero" class="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-[#e0d6c8]/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-      
-      <div class="flex-1 text-center md:text-left z-10 md:pr-10">
-        <p class="text-primary font-bold tracking-widest text-sm mb-4">PREMIUM KOREAN GOCHUGARU</p>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6 text-gray-900">
-          자연이 허락한 시간,<br>
-          <span class="text-primary">정성으로 빚어낸 붉은 빛.<br></span>
+  <!-- HERO -->
+  <section id="hero" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-14">
+
+      <div class="flex-1 text-center md:text-left z-10 md:pr-8">
+        <h1 class="text-4xl md:text-5xl lg:text-[3.4rem] font-serif font-bold leading-[1.25] mb-7 text-ink">
+          완도 바닷바람이 키운 것을,<br>
+          가마솥 정성으로 마무리합니다
         </h1>
-        <p class="text-lg text-gray-600 mb-10 leading-relaxed max-w-lg mx-auto md:mx-0 font-light">
-          완도의 맑은 해풍과 따스한 햇살 아래, 농부의 땀방울로 길러낸 프리미엄 고춧가루입니다. 김가네가 당신의 식탁에 건강한 매운맛을 약속합니다.
+        <p class="text-[17px] text-ink/70 mb-10 leading-relaxed max-w-lg mx-auto md:mx-0 font-light">
+          매운 고춧가루와 든든한 염소즙, 두 가지 모두 완도의 김가네가 밭에서부터 직접 챙깁니다. 중간 유통 없이 농가가 그대로 전해드리는 맛입니다.
         </p>
-        
-        <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-          <button onclick="document.getElementById('products').scrollIntoView()" class="px-8 py-4 bg-primary text-white rounded-full font-bold hover:bg-primaryHover hover:shadow-lg transition-all transform hover:-translate-y-1">
-            제품 살펴보기
+
+        <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-3">
+          <button onclick="document.getElementById('products').scrollIntoView()" class="px-8 py-4 bg-pepper text-white rounded-full font-bold hover:bg-pepperDeep transition-colors">
+            고춧가루 보기
+          </button>
+          <button onclick="document.getElementById('products').scrollIntoView()" class="px-8 py-4 bg-transparent border border-herb text-herbDeep rounded-full font-bold hover:bg-herb hover:text-white transition-colors">
+            염소즙 보기
           </button>
         </div>
       </div>
 
       <div class="flex-1 w-full relative">
-        <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl">
+        <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl shadow-black/10">
           <video autoplay muted loop playsinline class="w-full h-full object-cover">
-  <source src="8f74ba1a-0bce-454d-95d0-6795bbd28dde_1_720_N.mp4" type="video/mp4">
-  현재 브라우저는 비디오 태그를 지원하지 않습니다.
-</video>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+            <source src="f5c988cc-e3da-40b9-bba2-34ba72118967_3_720_N.mp4" type="video/mp4">
+          </video>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent"></div>
         </div>
-        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4">
-           <img src="Gemini_Generated_Image_wyel2ewyel2ewyel.png" class="w-12 h-12 object-contain mix-blend-multiply" />
+        <div class="absolute -bottom-6 -left-6 bg-card p-4 pr-6 rounded-2xl shadow-xl flex items-center gap-4 border border-black/5">
+           <img src="Gemini_Generated_Image_wyel2ewyel2ewyel.png" class="w-11 h-11 object-contain mix-blend-multiply" />
            <div>
-             <p class="text-xs text-gray-500 font-bold">100% 국내산</p>
-             <p class="text-sm font-serif font-bold">농가 직접 재배</p>
+             <p class="text-[11px] text-ink/50 font-bold tracking-tight">100% 국내산 · 완도</p>
+             <p class="text-sm font-serif font-bold text-ink">농가가 직접 재배·가공</p>
            </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-24 px-4 bg-white" id="products">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16">
-        <span class="text-primary font-bold uppercase tracking-widest text-sm">Our Products</span>
-        <h2 class="text-3xl md:text-4xl font-serif font-bold mt-2 mb-4 text-gray-900">가족을 위한 건강한 선택</h2>
-        <p class="text-gray-500">용도와 필요에 따라 알맞은 용량을 선택하세요.</p>
+  <div class="ridge-divider"></div>
+
+  <!-- PROCESS -->
+  <section class="py-24 px-4 bg-paper2/60" id="process">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-xl mb-16">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-ink mb-5">밭에서 식탁까지, 다섯 단계</h2>
+        <p class="text-ink/65 font-light leading-relaxed">
+          고춧가루든 염소즙이든, 김가네가 만드는 모든 것은 같은 손을 거칩니다. 재료를 고르는 눈부터 택배 상자를 닫는 순간까지, 아래 다섯 단계는 하나도 건너뛰지 않습니다.
+        </p>
       </div>
 
-      <div class="w-full max-w-5xl mx-auto mb-16 rounded-3xl overflow-hidden shadow-lg border border-gray-100 bg-[#f7eedf]/30">
-        <img src="nextcrew_Midjourney_Prompt_Professional_studio_photograph_of_th_7025178b-e649-4b7a-a371-157ccc3bc1a0.png" alt="김가네 고춧가루 패키지 세트" class="w-full h-auto object-cover mix-blend-multiply" />
-      </div>
+      <div class="relative">
+        <div class="hidden md:block process-line absolute top-9 left-0 right-0 z-0"></div>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-4 relative z-10">
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto" id="product-container">
+          <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-5 md:text-center">
+            <div class="process-line-v md:hidden absolute left-[19px] top-10 bottom-[-40px]"></div>
+            <div class="shrink-0 w-10 h-10 rounded-full bg-paper2 border-2 border-gold flex items-center justify-center font-serif font-bold text-gold text-sm">1</div>
+            <div>
+              <h3 class="font-serif font-bold text-ink text-lg mb-1.5">원료를 고르는 일</h3>
+              <p class="text-sm text-ink/60 font-light leading-relaxed">해를 오래 견딘 튼튼한 씨와, 건강하게 자란 원료만 다음 단계로 넘깁니다.</p>
+            </div>
+          </div>
+
+          <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-5 md:text-center">
+            <div class="process-line-v md:hidden absolute left-[19px] top-10 bottom-[-40px]"></div>
+            <div class="shrink-0 w-10 h-10 rounded-full bg-paper2 border-2 border-pepper flex items-center justify-center font-serif font-bold text-pepper text-sm">2</div>
+            <div>
+              <h3 class="font-serif font-bold text-ink text-lg mb-1.5">완도에서 키우는 시간</h3>
+              <p class="text-sm text-ink/60 font-light leading-relaxed">해풍과 볕이 좋은 완도 밭과 축사에서, 서두르지 않고 자랄 만큼 자라게 둡니다.</p>
+            </div>
+          </div>
+
+          <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-5 md:text-center">
+            <div class="process-line-v md:hidden absolute left-[19px] top-10 bottom-[-40px]"></div>
+            <div class="shrink-0 w-10 h-10 rounded-full bg-paper2 border-2 border-herb flex items-center justify-center font-serif font-bold text-herbDeep text-sm">3</div>
+            <div>
+              <h3 class="font-serif font-bold text-ink text-lg mb-1.5">전통 방식 그대로</h3>
+              <p class="text-sm text-ink/60 font-light leading-relaxed">고추는 볕에 말려 곱게 빻고, 염소는 가마솥에 오랜 시간 정성껏 고아냅니다.</p>
+            </div>
+          </div>
+
+          <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-5 md:text-center">
+            <div class="process-line-v md:hidden absolute left-[19px] top-10 bottom-[-40px]"></div>
+            <div class="shrink-0 w-10 h-10 rounded-full bg-paper2 border-2 border-gold flex items-center justify-center font-serif font-bold text-gold text-sm">4</div>
+            <div>
+              <h3 class="font-serif font-bold text-ink text-lg mb-1.5">위생적으로 소분</h3>
+              <p class="text-sm text-ink/60 font-light leading-relaxed">주문이 들어온 뒤 그때그때 소량으로 나눠 포장해 신선함을 지킵니다.</p>
+            </div>
+          </div>
+
+          <div class="flex md:flex-col items-start md:items-center gap-4 md:gap-5 md:text-center">
+            <div class="shrink-0 w-10 h-10 rounded-full bg-paper2 border-2 border-pepper flex items-center justify-center font-serif font-bold text-pepper text-sm">5</div>
+            <div>
+              <h3 class="font-serif font-bold text-ink text-lg mb-1.5">산지에서 바로 발송</h3>
+              <p class="text-sm text-ink/60 font-light leading-relaxed">중간 유통 단계 없이, 완도 김가네에서 곧바로 문 앞까지 보내드립니다.</p>
+            </div>
+          </div>
+
         </div>
+      </div>
     </div>
   </section>
 
-  <section class="py-24 px-4 bg-bgLight relative overflow-hidden" id="reviews">
-    
-    <div class="max-w-6xl mx-auto relative z-10">
-      <div class="flex flex-col md:flex-row justify-between items-end mb-16">
-        <div>
-          <span class="text-primary font-bold uppercase tracking-widest text-sm">Customer Stories</span>
-          <h2 class="text-3xl md:text-4xl font-serif font-bold mt-2 text-gray-900">김가네를 만난 식탁 이야기</h2>
+  <!-- PRODUCTS -->
+  <section class="py-24 px-4 bg-paper" id="products">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-ink mb-4">가족을 위한 두 가지 선택</h2>
+        <p class="text-ink/60 font-light">용도에 맞는 제품을 고르고, 필요한 용량으로 담아드립니다.</p>
+      </div>
+
+      <div class="flex justify-center gap-2 mb-14">
+        <button onclick="switchType('pepper')" id="tab-pepper" class="type-tab tab-pepper is-active px-6 py-2.5 rounded-full font-bold text-sm text-ink/70 bg-paper2 transition-colors">고춧가루</button>
+        <button onclick="switchType('herb')" id="tab-herb" class="type-tab tab-herb px-6 py-2.5 rounded-full font-bold text-sm text-ink/70 bg-paper2 transition-colors">염소즙</button>
+      </div>
+
+      <div id="panel-pepper">
+        <div class="w-full max-w-4xl mx-auto mb-14 rounded-[1.75rem] overflow-hidden shadow-lg shadow-black/5 bg-paper2/40 max-h-[360px] flex items-center justify-center">
+          <img src="nextcrew_Midjourney_Prompt_Professional_studio_photograph_of_th_7025178b-e649-4b7a-a371-157ccc3bc1a0.png" alt="김가네 고춧가루 패키지" class="w-full h-full object-cover mix-blend-multiply" />
         </div>
-        <div class="mt-4 md:mt-0 flex items-center gap-2 text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
-          <span class="text-yellow-400 text-xl">★★★★★</span>
-          <span class="font-bold">4.9 / 5.0</span>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto" id="product-container-pepper"></div>
+      </div>
+
+      <div id="panel-herb" class="hidden">
+        <div class="max-w-2xl mx-auto text-center mb-14">
+          <p class="text-ink/60 font-light leading-relaxed">완도에서 기른 염소를 가마솥에 오랜 시간 고아, 잡내 없이 진하게 담았습니다. 하루를 시작하는 아침, 든든한 보양이 필요할 때 챙기기 좋습니다.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto" id="product-container-herb"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="relative py-20 px-4 overflow-hidden bg-gradient-to-br from-paper2 to-[#e6d9bd]" id="reviews">
+    <video src="8f74ba1a-0bce-454d-95d0-6795bbd28dde_1_720_N.mp4" loop autoplay muted playsinline
+      onerror="this.style.display='none'"
+      class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none"></video>
+    <div class="absolute inset-0 bg-paper2/70"></div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-14">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-ink">김가네를 만난 식탁 이야기</h2>
+        <div class="mt-4 md:mt-0 flex items-center gap-2 text-ink/70 bg-card px-4 py-2 rounded-full border border-black/5">
+          <span class="text-gold text-lg">★★★★★</span>
+          <span class="font-bold text-sm">4.9 / 5.0</span>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 relative hover:shadow-md transition-shadow">
-          <div class="text-yellow-400 text-lg mb-4">★★★★★</div>
-          <p class="text-gray-700 mb-8 leading-relaxed font-light">
-            "색도 곱고 향이 정말 좋아요. 김장할 때 쓰려고 15kg 시켰는데 가족들이 모두 맛있다고 합니다. 다음에도 여기서 살 거예요."
-          </p>
+        <div class="bg-card p-8 rounded-3xl border border-black/5">
+          <div class="text-gold text-base mb-4">★★★★★</div>
+          <p class="text-ink/75 mb-8 leading-relaxed font-light">색도 곱고 향이 정말 좋아요. 김장할 때 쓰려고 15kg 시켰는데 가족들이 모두 맛있다고 합니다. 다음에도 여기서 살 거예요.</p>
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-400">김</div>
+            <div class="w-11 h-11 bg-paper2 rounded-full flex items-center justify-center font-bold text-ink/40">김</div>
             <div>
-              <p class="font-bold text-gray-900">김지* 님</p>
-              <p class="text-xs text-gray-500">15kg 대용량 구매</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 relative hover:shadow-md transition-shadow">
-          <div class="text-yellow-400 text-lg mb-4">★★★★★</div>
-          <p class="text-gray-700 mb-8 leading-relaxed font-light">
-            "국산인데 가격도 합리적이고 배송도 빨랐어요. 특히 짜지 않고 고소한 맛이 일품입니다. 농가 직거래라 믿을 수 있어서 좋습니다."
-          </p>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-400">이</div>
-            <div>
-              <p class="font-bold text-gray-900">이현* 님</p>
-              <p class="text-xs text-gray-500">5kg 실속형 구매</p>
+              <p class="font-bold text-ink text-sm">김지* 님</p>
+              <p class="text-xs text-ink/45">고춧가루 15kg 구매</p>
             </div>
           </div>
         </div>
 
-        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 relative hover:shadow-md transition-shadow">
-          <div class="text-yellow-400 text-lg mb-4">★★★★☆</div>
-          <p class="text-gray-700 mb-8 leading-relaxed font-light">
-            "어머니 드리려고 구매했습니다. '이 집 고춧가루가 제일 맛있다'고 하셔서 기분이 좋네요. 포장도 깔끔하고 정성이 느껴집니다."
-          </p>
+        <div class="bg-card p-8 rounded-3xl border border-black/5">
+          <div class="text-gold text-base mb-4">★★★★★</div>
+          <p class="text-ink/75 mb-8 leading-relaxed font-light">아버지 기력 보충하시라고 30포 주문했는데, 잡내가 전혀 없어서 계속 챙겨드리고 있어요. 진하고 든든한 맛입니다.</p>
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-400">박</div>
+            <div class="w-11 h-11 bg-paper2 rounded-full flex items-center justify-center font-bold text-ink/40">이</div>
             <div>
-              <p class="font-bold text-gray-900">박민* 님</p>
-              <p class="text-xs text-gray-500">10kg 든든형 구매</p>
+              <p class="font-bold text-ink text-sm">이현* 님</p>
+              <p class="text-xs text-ink/45">염소즙 30포 구매</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-card p-8 rounded-3xl border border-black/5">
+          <div class="text-gold text-base mb-4">★★★★☆</div>
+          <p class="text-ink/75 mb-8 leading-relaxed font-light">어머니 드리려고 구매했습니다. "이 집 고춧가루가 제일 맛있다"고 하셔서 기분이 좋네요. 포장도 깔끔하고 정성이 느껴집니다.</p>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-paper2 rounded-full flex items-center justify-center font-bold text-ink/40">박</div>
+            <div>
+              <p class="font-bold text-ink text-sm">박민* 님</p>
+              <p class="text-xs text-ink/45">고춧가루 10kg 구매</p>
             </div>
           </div>
         </div>
       </div>
-      <br>
-      <video src="f5c988cc-e3da-40b9-bba2-34ba72118967_3_720_N.mp4" loop autoplay muted class="video" width="100%"></video>
     </div>
-    
   </section>
 
-  <footer class="bg-[#1a1a1a] text-gray-400 py-16 px-4">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 border-b border-gray-800 pb-12">
+  <footer class="bg-ink text-paper/70 py-16 px-4">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 border-b border-white/10 pb-12">
       <div>
-        <div class="flex items-center gap-2 mb-6">
-           <img src="Gemini_Generated_Image_wyel2ewyel2ewyel.png" class="h-10 w-auto invert opacity-80" />
-        </div>
-        <p class="text-sm leading-relaxed font-light">
-          완도의 맑은 햇살과 해풍을 맞고 자란<br>우리 농산물, 정직하게 키우고 빻았습니다.
-        </p>
+        <img src="Gemini_Generated_Image_wyel2ewyel2ewyel.png" class="h-9 w-auto invert opacity-80 mb-6" />
+        <p class="text-sm leading-relaxed font-light">완도의 볕과 바닷바람 속에서 기른 것들을,<br>정직하게 만들어 그대로 보내드립니다.</p>
       </div>
       <div>
-        <h4 class="text-white font-bold mb-6 tracking-wider">CUSTOMER CENTER</h4>
-        <p class="text-2xl font-bold text-white mb-2"><a href="tel:010-2664-6246" class="hover:text-primary transition-colors">010-2664-6246</a></p>
-        <p class="text-sm font-light">운영시간: 평일 09:00 - 18:00</p>
-        <p class="text-sm font-light mt-1">(점심시간 12:00 - 13:00 / 주말 휴무)</p>
+        <h4 class="text-paper font-bold mb-6 tracking-wide">고객센터</h4>
+        <p class="text-2xl font-bold text-paper mb-2"><a href="tel:010-2664-6246" class="hover:text-pepper transition-colors">010-2664-6246</a></p>
+        <p class="text-sm font-light">평일 09:00 - 18:00 (점심 12:00 - 13:00)</p>
+        <p class="text-sm font-light mt-1">주말 · 공휴일 휴무</p>
       </div>
       <div>
-        <h4 class="text-white font-bold mb-6 tracking-wider">QUICK LINKS</h4>
+        <h4 class="text-paper font-bold mb-6 tracking-wide">바로가기</h4>
         <div class="flex flex-col space-y-3 text-sm font-light">
-          <a href="#hero" class="hover:text-white transition-colors w-max">브랜드 스토리</a>
-          <a href="#products" class="hover:text-white transition-colors w-max">제품 안내</a>
-          <a href="#reviews" class="hover:text-white transition-colors w-max">고객 후기</a>
+          <a href="#hero" class="hover:text-paper transition-colors w-max">이야기</a>
+          <a href="#process" class="hover:text-paper transition-colors w-max">만드는 과정</a>
+          <a href="#products" class="hover:text-paper transition-colors w-max">제품</a>
+          <a href="#reviews" class="hover:text-paper transition-colors w-max">후기</a>
         </div>
       </div>
     </div>
-    <div class="max-w-6xl mx-auto text-center text-xs font-light tracking-wide flex flex-col md:flex-row justify-between items-center">
+    <div class="max-w-6xl mx-auto text-center text-xs font-light flex flex-col md:flex-row justify-between items-center">
       <p>© <span id="currentYear"></span> GIMGANE. All rights reserved.</p>
       <div class="mt-4 md:mt-0 flex gap-4">
-        <a href="#" class="hover:text-white transition-colors">이용약관</a>
-        <a href="#" class="hover:text-white transition-colors">개인정보처리방침</a>
+        <a href="#" class="hover:text-paper transition-colors">이용약관</a>
+        <a href="#" class="hover:text-paper transition-colors">개인정보처리방침</a>
       </div>
     </div>
   </footer>
 
-  <div class="md:hidden fixed bottom-0 w-full bg-white border-t border-gray-100 shadow-[0_-10px_20px_rgba(0,0,0,0.05)] z-40 pb-safe flex p-2 gap-2">
-    <a href="tel:010-0000-0000" class="flex-1 py-3.5 text-center font-bold text-gray-700 bg-gray-100 rounded-xl active:bg-gray-200 transition-colors">
-      전화 문의
-    </a>
-    <button onclick="openModal()" class="flex-[2] py-3.5 text-center font-bold bg-primary text-white rounded-xl shadow-md active:bg-primaryHover transition-colors">
-      주문하기
-    </button>
+  <div class="md:hidden fixed bottom-0 w-full bg-card border-t border-black/5 shadow-[0_-8px_20px_rgba(0,0,0,0.06)] z-40 pb-safe flex p-2 gap-2">
+    <a href="tel:010-2664-6246" class="flex-1 py-3.5 text-center font-bold text-ink/80 bg-paper2 rounded-xl active:bg-paper transition-colors">전화 문의</a>
+    <button onclick="openModal(currentType)" class="flex-[2] py-3.5 text-center font-bold bg-pepper text-white rounded-xl active:bg-pepperDeep transition-colors">주문하기</button>
   </div>
 
+  <!-- ORDER MODAL -->
   <div id="order-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeModal()"></div>
-    <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-md relative z-10 max-h-[90vh] flex flex-col overflow-hidden">
-      
-      <div class="px-8 py-6 bg-gray-50 flex justify-between items-center border-b border-gray-100">
-        <h3 class="text-xl font-bold font-serif text-gray-900">주문서 작성</h3>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-primary transition-colors text-3xl leading-none">&times;</button>
+    <div class="absolute inset-0 bg-black/55 backdrop-blur-sm" onclick="closeModal()"></div>
+    <div class="bg-card rounded-[2rem] shadow-2xl w-full max-w-md relative z-10 max-h-[90vh] flex flex-col overflow-hidden">
+
+      <div class="px-8 py-6 bg-paper2/50 flex justify-between items-center border-b border-black/5">
+        <h3 class="text-xl font-bold font-serif text-ink">주문서 작성</h3>
+        <button onclick="closeModal()" class="text-ink/40 hover:text-pepper transition-colors text-3xl leading-none">&times;</button>
       </div>
 
       <div class="p-8 overflow-y-auto">
         <form id="order-form" class="space-y-6" onsubmit="submitOrder(event)">
+
           <div>
-            <label class="block text-sm font-bold text-gray-900 mb-3">용량 선택</label>
-            <div class="grid grid-cols-3 gap-3">
+            <label class="block text-sm font-bold text-ink mb-3">제품 선택</label>
+            <div class="grid grid-cols-2 gap-3">
               <label class="cursor-pointer">
-                <input type="radio" name="weight" value="1" class="peer sr-only" onchange="updatePrice()">
-                <div class="text-center py-3 border border-gray-200 rounded-xl peer-checked:border-primary peer-checked:bg-red-50 peer-checked:text-primary font-bold text-sm transition-all">1kg</div>
+                <input type="radio" name="ptype" value="pepper" class="peer sr-only" checked onchange="onTypeChange()">
+                <div class="text-center py-3 border border-black/10 rounded-xl peer-checked:border-pepper peer-checked:bg-pepper/5 peer-checked:text-pepper font-bold text-sm transition-all">고춧가루</div>
               </label>
               <label class="cursor-pointer">
-                <input type="radio" name="weight" value="5" class="peer sr-only" checked onchange="updatePrice()">
-                <div class="text-center py-3 border border-gray-200 rounded-xl peer-checked:border-primary peer-checked:bg-red-50 peer-checked:text-primary font-bold text-sm transition-all">5kg</div>
-              </label>
-              <label class="cursor-pointer">
-                <input type="radio" name="weight" value="10" class="peer sr-only" onchange="updatePrice()">
-                <div class="text-center py-3 border border-gray-200 rounded-xl peer-checked:border-primary peer-checked:bg-red-50 peer-checked:text-primary font-bold text-sm transition-all">10kg</div>
+                <input type="radio" name="ptype" value="herb" class="peer sr-only" onchange="onTypeChange()">
+                <div class="text-center py-3 border border-black/10 rounded-xl peer-checked:border-herb peer-checked:bg-herb/5 peer-checked:text-herbDeep font-bold text-sm transition-all">염소즙</div>
               </label>
             </div>
           </div>
 
           <div>
-            <label class="block text-sm font-bold text-gray-900 mb-3">수량</label>
-            <div class="flex items-center border border-gray-200 rounded-xl w-max overflow-hidden bg-white shadow-sm">
-              <button type="button" onclick="changeQty(-1)" class="px-5 py-2.5 bg-gray-50 hover:bg-gray-100 text-gray-600 font-bold transition-colors">-</button>
+            <label class="block text-sm font-bold text-ink mb-3" id="size-label">용량 선택</label>
+            <div class="grid grid-cols-3 gap-3" id="size-options"></div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-ink mb-3">수량</label>
+            <div class="flex items-center border border-black/10 rounded-xl w-max overflow-hidden bg-white">
+              <button type="button" onclick="changeQty(-1)" class="px-5 py-2.5 bg-paper2/60 hover:bg-paper2 text-ink/70 font-bold transition-colors">-</button>
               <input type="number" id="qty-input" value="1" min="1" max="50" class="w-16 text-center focus:outline-none font-bold bg-transparent" onchange="updatePrice()">
-              <button type="button" onclick="changeQty(1)" class="px-5 py-2.5 bg-gray-50 hover:bg-gray-100 text-gray-600 font-bold transition-colors">+</button>
+              <button type="button" onclick="changeQty(1)" class="px-5 py-2.5 bg-paper2/60 hover:bg-paper2 text-ink/70 font-bold transition-colors">+</button>
             </div>
           </div>
 
-          <div class="bg-[#fbf9f6] p-5 rounded-2xl space-y-3 border border-[#f0ebe1]">
-            <div class="flex justify-between text-sm text-gray-600 font-medium">
+          <div class="bg-paper p-5 rounded-2xl space-y-3 border border-black/5">
+            <div class="flex justify-between text-sm text-ink/70 font-medium">
               <span>상품금액</span>
               <span id="price-product">0원</span>
             </div>
-            <div class="flex justify-between text-sm text-gray-600 font-medium">
+            <div class="flex justify-between text-sm text-ink/70 font-medium">
               <span>배송비</span>
-              <span class="text-green-600">무료배송</span>
+              <span class="text-herbDeep">무료배송</span>
             </div>
-            <div class="border-t border-gray-200 pt-3 mt-3 flex justify-between items-end">
-              <span class="font-bold text-gray-900">총 결제금액</span>
-              <span id="price-total" class="text-primary text-2xl font-bold tracking-tight">0원</span>
+            <div class="border-t border-black/10 pt-3 mt-3 flex justify-between items-end">
+              <span class="font-bold text-ink">총 결제금액</span>
+              <span id="price-total" class="text-pepper text-2xl font-bold">0원</span>
             </div>
           </div>
 
           <div class="space-y-4 pt-2">
-            <div>
-              <input type="text" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all text-sm" placeholder="주문자 성함">
-            </div>
-            <div>
-              <input type="tel" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all text-sm" placeholder="연락처 (예: 010-1234-5678)">
-            </div>
-            <div>
-              <input type="text" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all text-sm" placeholder="받으실 주소">
-            </div>
+            <input type="text" required class="w-full px-5 py-3.5 bg-paper2/40 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-pepper/20 focus:border-pepper focus:bg-white transition-all text-sm" placeholder="주문자 성함">
+            <input type="tel" required class="w-full px-5 py-3.5 bg-paper2/40 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-pepper/20 focus:border-pepper focus:bg-white transition-all text-sm" placeholder="연락처 (예: 010-1234-5678)">
+            <input type="text" required class="w-full px-5 py-3.5 bg-paper2/40 border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-pepper/20 focus:border-pepper focus:bg-white transition-all text-sm" placeholder="받으실 주소">
           </div>
-          
+
           <div class="pt-2">
-            <button type="submit" class="w-full bg-gray-900 text-white font-bold text-lg py-4 rounded-xl hover:bg-primary transition-colors shadow-lg">
-              주문 접수하기
-            </button>
+            <button type="submit" class="w-full bg-ink text-paper font-bold text-lg py-4 rounded-xl hover:bg-pepperDeep transition-colors">주문 접수하기</button>
           </div>
         </form>
       </div>
@@ -337,72 +427,112 @@
   </div>
 
   <script>
-    // --- 데이터 설정 (이미지에 맞춰 1kg, 5kg, 10kg로 수정) ---
-    const prices = {
-      "1": 20000,
-      "5": 85000,
-      "10": 165000
+    // ⚠️ 아래 용량·가격은 예시입니다. 실제 판매 가격에 맞게 꼭 수정해주세요.
+    const catalog = {
+      pepper: {
+        unitLabel: 'kg',
+        sizeLabel: '용량 선택',
+        products: [
+          { size: 1,  price: 20000,  desc: '간단한 요리를 위한 소용량', tag: '가정용' },
+          { size: 5,  price: 85000,  desc: '4인 가구, 든든하게 쟁여두기', tag: 'BEST' },
+          { size: 10, price: 165000, desc: '김장철, 대가족을 위한 대용량', tag: '할인' }
+        ]
+      },
+      herb: {
+        unitLabel: '포',
+        sizeLabel: '수량 선택 (포)',
+        products: [
+          { size: 20, price: 89000,  desc: '먼저 맛보기 좋은 실속 구성', tag: '가정용' },
+          { size: 30, price: 129000, desc: '한 달 꾸준히 챙기기 좋은 구성', tag: 'BEST' },
+          { size: 50, price: 199000, desc: '온 가족이 함께 챙기는 든든 구성', tag: '할인' }
+        ]
+      }
     };
 
-    const productsData = [
-      { weight: 1, desc: "간단한 요리를 위한 소용량", tag: "가정용" },
-      { weight: 5, desc: "4인 가구, 든든하게 쟁여두기", tag: "BEST" },
-      { weight: 10, desc: "김장철, 대가족을 위한 대용량", tag: "할인" }
-    ];
+    let currentType = 'pepper';
 
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('currentYear').textContent = new Date().getFullYear();
-      renderProducts();
+      renderProducts('pepper');
+      renderProducts('herb');
+      renderSizeOptions();
       updatePrice();
     });
 
-    function renderProducts() {
-      const container = document.getElementById('product-container');
-      container.innerHTML = productsData.map(prod => `
-        <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+    function renderProducts(type) {
+      const container = document.getElementById('product-container-' + type);
+      const data = catalog[type];
+      container.innerHTML = data.products.map(p => `
+        <div class="bg-card rounded-3xl p-8 border border-black/5 hover:shadow-lg hover:shadow-black/5 transition-all duration-300 flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-6">
-              <span class="bg-gray-900 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wider">${prod.tag}</span>
+              <span class="${type === 'pepper' ? 'bg-pepper' : 'bg-herb'} text-white text-xs font-bold px-3 py-1.5 rounded-full">${p.tag}</span>
             </div>
-            <h3 class="text-3xl font-serif font-bold text-gray-900 mb-2">${prod.weight}kg 패키지</h3>
-            <p class="text-gray-500 text-sm mb-8 font-light">${prod.desc}</p>
+            <h3 class="text-2xl font-serif font-bold text-ink mb-2">${p.size}${data.unitLabel}</h3>
+            <p class="text-ink/55 text-sm mb-8 font-light">${p.desc}</p>
           </div>
           <div>
-            <div class="text-3xl font-bold text-primary mb-6 tracking-tight">
-              ${prices[prod.weight].toLocaleString()}<span class="text-lg text-gray-500 font-medium">원</span>
+            <div class="text-2xl font-bold ${type === 'pepper' ? 'text-pepper' : 'text-herbDeep'} mb-6">
+              ${p.price.toLocaleString()}<span class="text-base text-ink/50 font-medium">원</span>
             </div>
-            <button onclick="openModal(${prod.weight})" class="w-full py-4 bg-gray-50 text-gray-900 font-bold rounded-xl group-hover:bg-primary group-hover:text-white transition-colors shadow-sm">
-              선택하기
-            </button>
+            <button onclick="openModal('${type}', ${p.size})" class="w-full py-3.5 bg-paper2/60 text-ink font-bold rounded-xl hover:bg-ink hover:text-paper transition-colors">선택하기</button>
           </div>
         </div>
       `).join('');
     }
 
+    function switchType(type) {
+      currentType = type;
+      document.getElementById('panel-pepper').classList.toggle('hidden', type !== 'pepper');
+      document.getElementById('panel-herb').classList.toggle('hidden', type !== 'herb');
+      document.getElementById('tab-pepper').classList.toggle('is-active', type === 'pepper');
+      document.getElementById('tab-herb').classList.toggle('is-active', type === 'herb');
+    }
+
     const menuBtn = document.getElementById('menu-btn');
     const header = document.getElementById('header');
-    
-    menuBtn.addEventListener('click', () => {
-      header.classList.toggle('mobile-menu-active');
-    });
-
+    menuBtn.addEventListener('click', () => header.classList.toggle('mobile-menu-active'));
     document.querySelectorAll('#mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        header.classList.remove('mobile-menu-active');
-      });
+      link.addEventListener('click', () => header.classList.remove('mobile-menu-active'));
     });
 
-    // --- 모달 제어 로직 ---
+    // --- 모달 ---
     const modal = document.getElementById('order-modal');
-    
-    function openModal(weight = 5) {
+
+    function renderSizeOptions() {
+      const data = catalog[currentType];
+      document.getElementById('size-label').textContent = data.sizeLabel;
+      const wrap = document.getElementById('size-options');
+      wrap.innerHTML = data.products.map((p, i) => `
+        <label class="cursor-pointer">
+          <input type="radio" name="size" value="${p.size}" class="peer sr-only" ${i === 1 ? 'checked' : ''} onchange="updatePrice()">
+          <div class="text-center py-3 border border-black/10 rounded-xl peer-checked:border-pepper peer-checked:bg-pepper/5 peer-checked:text-pepper font-bold text-sm transition-all">${p.size}${data.unitLabel}</div>
+        </label>
+      `).join('');
+    }
+
+    function onTypeChange() {
+      const radios = document.getElementsByName('ptype');
+      for (const r of radios) if (r.checked) currentType = r.value;
+      renderSizeOptions();
+      updatePrice();
+    }
+
+    function openModal(type = 'pepper', size = null) {
+      currentType = type;
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
-      
-      const radios = document.getElementsByName('weight');
-      for (let r of radios) {
-        if (r.value == weight) r.checked = true;
+
+      const typeRadios = document.getElementsByName('ptype');
+      for (const r of typeRadios) r.checked = (r.value === type);
+
+      renderSizeOptions();
+
+      if (size) {
+        const sizeRadios = document.getElementsByName('size');
+        for (const r of sizeRadios) if (r.value == size) r.checked = true;
       }
+
       document.getElementById('qty-input').value = 1;
       updatePrice();
     }
@@ -422,18 +552,17 @@
     }
 
     function updatePrice() {
-      const radios = document.getElementsByName('weight');
-      let selectedWeight = 5;
-      for (let r of radios) {
-        if (r.checked) selectedWeight = r.value;
-      }
-      
-      const qty = parseInt(document.getElementById('qty-input').value) || 1;
-      const unitPrice = prices[selectedWeight];
-      const totalPrice = unitPrice * qty;
+      const data = catalog[currentType];
+      const sizeRadios = document.getElementsByName('size');
+      let selectedSize = data.products[1].size;
+      for (const r of sizeRadios) if (r.checked) selectedSize = parseInt(r.value);
 
-      document.getElementById('price-product').textContent = totalPrice.toLocaleString() + '원';
-      document.getElementById('price-total').textContent = totalPrice.toLocaleString() + '원';
+      const product = data.products.find(p => p.size === selectedSize) || data.products[0];
+      const qty = parseInt(document.getElementById('qty-input').value) || 1;
+      const total = product.price * qty;
+
+      document.getElementById('price-product').textContent = total.toLocaleString() + '원';
+      document.getElementById('price-total').textContent = total.toLocaleString() + '원';
     }
 
     function submitOrder(e) {
@@ -442,12 +571,12 @@
       form.innerHTML = `
         <div class="text-center py-16">
           <div class="text-5xl mb-6">✨</div>
-          <h4 class="text-2xl font-bold font-serif mb-3 text-gray-900">주문 접수 완료!</h4>
-          <p class="text-gray-500 mb-8 font-light">입력하신 연락처로 담당자가 신속히 확인 전화를 드리겠습니다.</p>
-          <button onclick="closeModal(); setTimeout(()=>location.reload(), 300)" class="w-full py-4 bg-gray-900 text-white rounded-xl font-bold hover:bg-primary transition-colors">확인</button>
+          <h4 class="text-2xl font-bold font-serif mb-3 text-ink">주문 접수 완료!</h4>
+          <p class="text-ink/60 mb-8 font-light">입력하신 연락처로 담당자가 신속히 확인 전화를 드리겠습니다.</p>
+          <button onclick="closeModal(); setTimeout(()=>location.reload(), 300)" class="w-full py-4 bg-ink text-paper rounded-xl font-bold hover:bg-pepperDeep transition-colors">확인</button>
         </div>
       `;
     }
   </script>
-</body> 
+</body>
 </html>
